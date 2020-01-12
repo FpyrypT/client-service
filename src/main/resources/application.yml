@@ -1,4 +1,16 @@
 server:
   port: 9999
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+#simply testing property
 myapp:
   port: 9966

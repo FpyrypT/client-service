@@ -3,6 +3,7 @@ package com.ecosystem.clientservice.controller;
 import com.ecosystem.clientservice.model.Client;
 import com.ecosystem.clientservice.properties.ClientServiceProperties;
 import com.ecosystem.clientservice.repository.ClientRepository;
+import com.netflix.discovery.EurekaClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +19,7 @@ public class ClientController {
 
     private final ClientRepository clientRepository;
     private final ClientServiceProperties clientServiceProperties;
+    private final EurekaClient eurekaClient;
 
     @GetMapping("/")
     public List<Client> getClients() {
@@ -32,5 +34,10 @@ public class ClientController {
     @GetMapping("/props")
     public Integer getPort() {
         return clientServiceProperties.getPort();
+    }
+
+    @GetMapping("/eureka")
+    public String getEureka(){
+        return eurekaClient.getApplication("client-service").getName();
     }
 }
